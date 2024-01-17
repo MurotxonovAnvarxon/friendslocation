@@ -31,4 +31,10 @@ class LocationService implements AppLocation {
             value == LocationPermission.whileInUse)
         .catchError((_) => false);
   }
+
+  @override
+  Future<AppLatLong> getFriendsLocations() {
+
+    throw UnimplementedError();
+  }
 }
