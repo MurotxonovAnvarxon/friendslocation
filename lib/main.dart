@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:friendslocation/getX/state_manager/controller/map_screen_getx_controller.dart';
+import 'package:friendslocation/util/theme_change.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:friendslocation/presentation/enter_name_screen.dart';
@@ -14,7 +15,6 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   AndroidYandexMap.useAndroidViewSurface = false;
-
   runApp(const MyApp());
 }
 
@@ -29,10 +29,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
+        theme: CustomTheme.lightTheme,
+        darkTheme: CustomTheme.darkTheme,
+        themeMode: ThemeMode.system,
         // home: MapScreen(),
         initialRoute: "/entername",
         getPages: [
