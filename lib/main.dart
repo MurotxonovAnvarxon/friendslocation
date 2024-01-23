@@ -1,5 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:friendslocation/data/local/sharedpreference/mypref.dart';
+import 'package:friendslocation/getX/state_manager/controller/home_page_controller.dart';
 import 'package:friendslocation/getX/state_manager/controller/map_screen_getx_controller.dart';
+import 'package:friendslocation/presentation/home_page.dart';
 import 'package:friendslocation/util/theme_change.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +14,7 @@ import 'presentation/map_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  MyPref.init();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -21,11 +25,11 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     Get.put(EnterNameController());
     Get.put(MapScreenGetXController());
+    Get.put(HomePageController());
     return GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
@@ -33,10 +37,11 @@ class MyApp extends StatelessWidget {
         darkTheme: CustomTheme.darkTheme,
         themeMode: ThemeMode.system,
         // home: MapScreen(),
-        initialRoute: "/entername",
+        initialRoute: MyPref.getName().isNull?"/entername":"/homepage",
         getPages: [
           GetPage(name: "/entername", page: () => EnterNameScreen()),
           GetPage(name: "/mapscreen", page: () => MapScreen()),
+          GetPage(name: "/homepage", page: () => HomePage()),
         ]);
   }
 }

@@ -13,7 +13,6 @@ import '../getX/state_manager/controller/map_screen_getx_controller.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
-
   @override
   State<MapScreen> createState() => _MapScreenState();
 }
@@ -63,6 +62,12 @@ class _MapScreenState extends State<MapScreen> {
               Point(latitude: friend.late ?? 0, longitude: friend.long ?? 0)));
       setState(() {});
     }
+  }
+
+  @override
+  void dispose() {
+    mapGetxController.dispose();
+    super.dispose();
   }
 
   @override
